@@ -1,4 +1,3 @@
-require_relative './file_io'
 
 class Enigma
   attr_reader :state,
@@ -19,7 +18,7 @@ class Enigma
   end
 
   def load_cryption
-  
+
   end
   # def next_state(klass=Encryption)
   #   @state = klass.new(self)
