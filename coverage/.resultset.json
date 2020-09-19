@@ -4,17 +4,56 @@
       "/Users/georgesoderholm/turing/mod_1/week_5/enigma/lib/enigma.rb": {
         "lines": [
           1,
-          null,
-          1,
           1,
           null,
           null,
           1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/georgesoderholm/turing/mod_1/week_5/enigma/lib/file_io.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          null,
+          0,
+          null,
+          null
+        ]
+      },
+      "/Users/georgesoderholm/turing/mod_1/week_5/enigma/lib/letter.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          0,
+          0,
           null,
           null
         ]
       }
     },
-    "timestamp": 1600473511
+    "timestamp": 1600483224
   }
 }

@@ -1,7 +1,9 @@
 require './test/test_helper'
 require './lib/enigma'
+require './lib/state'
+require 'mocha/minitest'
 
-class EnigmaTest < Minitest::Test
+class StateTest < Minitest::Test
   def setup
     encrypted_path = './data/encrypted.txt'
     decrypted_path = './data/decrypted.txt'
@@ -10,15 +12,12 @@ class EnigmaTest < Minitest::Test
       encrypted: encrypted_path,
       decrypted: decrypted_path
     }
-
-    @enigma = Enigma.from_txt(locations)
+    enigma = mock('enigma')
+    enigma.stubs(:class).returns(Enigma)
+    @state_machine = State.new(locations, enigma)
   end
 
   def test_it_exists
-    assert_instance_of Enigma, @enigma
-  end
-
-  def test_it_can_load_state_machine
-
+    assert_instance_of State, @state_machine
   end
 end

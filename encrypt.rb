@@ -6,7 +6,7 @@ require './lib/decryption'
 # encrypted_message  = ARGV[1]
 
 encrypted_path = './data/encrypted.txt'
-decrypted_path = '/data/decrypted.txt'
+decrypted_path = './data/decrypted.txt'
 
 locations = {
   encrypted: encrypted_path,

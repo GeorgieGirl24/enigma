@@ -7,7 +7,7 @@ require './lib/decryption'
 # ARGV[2] the_key
 # ARGV[3] the_date
 encrypted_path = './data/encrypted.txt'
-decrypted_path = '/data/decrypted.txt'
+decrypted_path = './data/decrypted.txt'
 
 locations = {
   encrypted: encrypted_path,
