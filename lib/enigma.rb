@@ -1,27 +1,15 @@
+require 'date'
 
 class Enigma
-  attr_reader :state,
-              :state_machine,
-              :decrypted,
-              :encrypted
-  def self.from_txt(locations)
-    Enigma.new
-  end
-
   def initialize
-    @state = nil
-    # @locations = locations
-    # @state_machine = State.new(self)
-    @decrypted = decrypted
-    @encrypted = encrypted
-    # require 'pry';binding.pry
-  end
-
-  def load_cryption
 
   end
-  # def next_state(klass=Encryption)
-  #   @state = klass.new(self)
-  #   # @state = Encryption.new(@locations, self)
-  # end
+
+  def find_todays_date
+    Date.today.strftime('%d%m%y')
+  end
+
+  def find_random_number
+    rand(99999).to_s.rjust(5, '0')
+  end
 end
