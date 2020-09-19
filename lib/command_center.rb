@@ -23,5 +23,4 @@ class CommandCenter
   def out_put_message
     "Created '#{@output_file}' with the key #{@key} and date #{@date}"
   end
-
 end
