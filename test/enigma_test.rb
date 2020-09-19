@@ -1,21 +1,11 @@
 require './test/test_helper'
 require './lib/state'
 require './lib/enigma'
-require './lib/decrypted_phrase'
-require './lib/encrypted_phrase'
-require './lib/decryption'
-require './lib/encryption'
+require './lib/command_center'
+require 'mocha/minitest'
 
 class EnigmaTest < Minitest::Test
   def setup
-    encrypted_path = './data/encrypted.txt'
-    decrypted_path = './data/decrypted.txt'
-
-    locations = {
-      encrypted: encrypted_path,
-      decrypted: decrypted_path
-    }
-
     @enigma = Enigma.new
   end
 
@@ -23,11 +13,15 @@ class EnigmaTest < Minitest::Test
     assert_instance_of Enigma, @enigma
   end
 
-  def test_it_can_load_cryption
-    expected = 0
-    assert_equal expected, @enigma.load_cryption
+  def test_it_can_todays_date
+    today = mock('today')
+    Date.expects(:today).returns(today)
+    today.expects(:strftime).returns('190920')
+    assert_equal '190920', @enigma.find_todays_date
   end
-  def test_it_can_load_state_machine
 
-  end
+  # def test_it_can_generate_a_random_five_number_code
+  #
+  #   assert_equal '02715', @enigma.find_random_number
+  # end
 end
