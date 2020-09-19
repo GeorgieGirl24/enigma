@@ -7,4 +7,5 @@ require './lib/command_center'
 # ARGV[1] should write the decrypted message
 # ARGV[2] the_key
 # ARGV[3] the_date
-command_center = CommandCenter.new()
+command_center = CommandCenter.new(ARGV)
+command_center.write_to_a_file
