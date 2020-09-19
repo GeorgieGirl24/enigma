@@ -1,10 +1,6 @@
 require 'date'
 
 class Enigma
-  def initialize
-
-  end
-
   def find_todays_date
     Date.today.strftime('%d%m%y')
   end
@@ -13,8 +9,13 @@ class Enigma
     rand(99999).to_s.rjust(5, '0')
   end
 
-  def encrypt(string, key, date)
+  def encrypt(string, key=find_random_number, date=find_todays_date)
     #call a class Translate to give me answer!
-    {encryption: "keder ohulw!", key: key, date: date}
+    { encryption: string, key: key, date: date }
+  end
+
+  def decrypt(string, key=find_random_number, date=find_todays_date)
+    #call a class Translate to give me answer!
+    { decryption: string, key: key, date: date }
   end
 end
