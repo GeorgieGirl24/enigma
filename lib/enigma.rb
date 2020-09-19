@@ -1,3 +1,5 @@
+require './file_io'
+
 class Enigma
   attr_reader :state,
               :state_machine,
@@ -10,12 +12,12 @@ class Enigma
     @state = nil
     @state_machine = State.new(locations, self)
     @locations = locations
+    @decrypted = decrypted
+    @encrypted = encrypted
   end
 
   def next_state(klass=Encryption)
     @state = klass.new(@locations, self)
     # @state = Encryption.new(@locations, self)
-
-
   end
 end
