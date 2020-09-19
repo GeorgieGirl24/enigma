@@ -1,7 +1,7 @@
 require './test/test_helper'
-require './lib/state'
 require './lib/enigma'
 require './lib/command_center'
+require './lib/translate'
 require 'mocha/minitest'
 
 class EnigmaTest < Minitest::Test
@@ -24,4 +24,15 @@ class EnigmaTest < Minitest::Test
   #
   #   assert_equal '02715', @enigma.find_random_number
   # end
+
+  def test_it_can_make_an_encryption_with_three_arguments
+    arguments = ['hello world', '02715', '040895']
+    Translate.stubs(:return_message).with(arguments).returns('keder ohulw!')
+    expected = {
+      encryption: 'keder ohulw!',
+      key: '02715',
+      date: '040895'
+    }
+    assert_equal expected, @enigma.encrypt('keder ohulw!', '02715', '040895')
+  end
 end
