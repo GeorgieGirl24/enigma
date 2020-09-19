@@ -21,7 +21,7 @@ class ShiftTest < Minitest::Test
 
   def test_it_can_find_the_last_four_digits
     offset = '040895'
-    assert_equal '1025', Shift.last_four_digits(offset)
+    assert_equal 1025, Shift.last_four_digits(offset)
   end
 
   def test_it_can_split_up_the_key_value
@@ -31,7 +31,7 @@ class ShiftTest < Minitest::Test
 
   def test_it_can_add_the_find_the_shift
     key = '02715'
-    offset = '040895'
+    offset = '1025'
 
     expected = {A: 3, B: 27, C: 73, D: 20}
     assert_equal expected, Shift.find_the_shift(key, offset)

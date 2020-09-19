@@ -5,7 +5,6 @@ class Shift
   end
 
   def self.last_four_digits(offset)
-    self.squared_number(offset)[-4..-1]
   end
 
   def self.key_values(key)
@@ -14,7 +13,13 @@ class Shift
     end
   end
 
-  def self.find_the_shift
-    
+  def self.find_the_shift(key, offset)
+    last_four_digits(offset).chars.map.with_index do |value, index|
+      key_values(key) + 0
+    end
+    # offset.chars.map.with_index do |value, index|
+    #   require 'pry';binding.pry
+    #   value.to_i + key[index].to_i
+    # end
   end
 end

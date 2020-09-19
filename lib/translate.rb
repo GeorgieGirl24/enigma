@@ -1,2 +1,3 @@
+require './lib/shift'
 class Translate
-end 
+end
