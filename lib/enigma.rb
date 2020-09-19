@@ -1,23 +1,28 @@
-require './file_io'
+require_relative './file_io'
 
 class Enigma
   attr_reader :state,
               :state_machine,
-              :locations
+              :decrypted,
+              :encrypted
   def self.from_txt(locations)
-    Enigma.new(locations)
+    Enigma.new
   end
 
-  def initialize(locations)
+  def initialize
     @state = nil
-    @state_machine = State.new(locations, self)
-    @locations = locations
+    # @locations = locations
+    # @state_machine = State.new(self)
     @decrypted = decrypted
     @encrypted = encrypted
+    # require 'pry';binding.pry
   end
 
-  def next_state(klass=Encryption)
-    @state = klass.new(@locations, self)
-    # @state = Encryption.new(@locations, self)
+  def load_cryption
+  
   end
+  # def next_state(klass=Encryption)
+  #   @state = klass.new(self)
+  #   # @state = Encryption.new(@locations, self)
+  # end
 end

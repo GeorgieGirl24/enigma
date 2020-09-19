@@ -13,6 +13,6 @@ locations = {
   decrypted: decrypted_path
 }
 
-file = FileIO.new
-enigma = Enigma.from_txt(locations)
+
+enigma = Enigma.new
 puts "#{the_file_it_wrote_to} #{the_key} #{the_date}"
