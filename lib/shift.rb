@@ -21,7 +21,6 @@ class Shift
     key.zip(offset.to_s.each_char.each_slice(1).map do |char|
       char.join.to_i
     end)
-
   end
   def self.find_the_sum(key, offset)
     combine_key_and_offset(key, offset).map do |set|

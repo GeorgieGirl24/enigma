@@ -31,6 +31,12 @@ class Translate
     seperate_letters.each_with_index do |letter, index|
       hash[index] = letter
     end
-    hash
+    which_shift = hash.keys.map do |key|
+      key.divmod(4)
+    end
+    which_shift.map do |set|
+      set.delete(set[1])
+    end
+    # require 'pry';binding.pry
   end
 end
