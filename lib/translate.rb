@@ -15,6 +15,6 @@ class Translate
 
   def self.get_code_break(key, offset)
     Shift.find_the_shift(key, offset)
-    require 'pry';binding.pry
+    # require 'pry';binding.pry
   end
 end
