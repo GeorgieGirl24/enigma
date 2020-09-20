@@ -12,4 +12,9 @@ class Translate
   def self.find_indexes_letter(index)
     make_alphabet[index]
   end
+
+  def self.get_code_break(key, offset)
+    Shift.find_the_shift(key, offset)
+    require 'pry';binding.pry
+  end
 end
