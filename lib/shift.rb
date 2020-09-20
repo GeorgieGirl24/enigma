@@ -13,16 +13,19 @@ class Shift
     end
   end
 
-  def self.find_the_shift(key, offset)
-    array = offset.to_s.each_char.each_slice(1).map do |char|
+  def self.combine_key_and_offset(key, offset)
+    key.zip(offset.to_s.each_char.each_slice(1).map do |char|
       char.join.to_i
-    end
-    new_array = key.zip(array)
-    something = new_array.map do |set|
+    end)
+
+  end
+  def self.find_the_sum(key, offset)
+    combine_key_and_offset(key, offset).map do |set|
       set.sum
     end
-    hash = {}
-    
+  end
 
+  def self.find_the_shift(key, offset)
+    (:A..:D).to_a.zip(find_the_sum(key, offset)).to_h
   end
 end
