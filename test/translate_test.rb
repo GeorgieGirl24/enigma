@@ -2,15 +2,19 @@ require './test/test_helper'
 require './lib/enigma'
 require './lib/command_center'
 require './lib/translate'
+require './lib/shift'
 require 'mocha/minitest'
+
 
 class TranslateTest < Minitest::Test
   def setup
     @translate = Translate.new
+    @shift = Shift.new
   end
 
   def test_it_exists
     assert_instance_of Translate, @translate
+    assert_instance_of Shift, @shift
   end
 
   def test_it_can_set_up_an_alphabet
@@ -31,10 +35,10 @@ class TranslateTest < Minitest::Test
 
   def test_it_can_take_a_return_value_from_shift_class
     arg_1 = [02, 27, 71, 15]
-    arg_2 = '040895'
+    arg_2 = 1025
+    Shift.find_the_shift(arg_1, arg_2)
     expected = { A: 3, B: 27, C: 73, D: 20 }
-    Shift.stubs(:find_the_shift).with(arg_1, arg_2).returns(expected)
-
+    # Shift.stubs(:find_the_shift).with(arg_1, arg_2).returns(expected)
     assert_equal expected, Translate.get_code_break(arg_1, arg_2)
   end
 
