@@ -15,13 +15,13 @@ class ShiftTest < Minitest::Test
   end
 
   def test_it_can_square_a_six_digit_number
-    number = '040895'
-    assert_equal 1672401025, Shift.squared_number(number)
+    date = '040895'
+    assert_equal 1672401025, Shift.squared_number(date)
   end
 
   def test_it_can_find_the_last_four_digits
-    number = '040895'
-    squared_number = Shift.squared_number(number)
+    date = '040895'
+    squared_number = Shift.squared_number(date)
     assert_equal 1025, Shift.last_four_digits(squared_number)
   end
 
@@ -31,10 +31,10 @@ class ShiftTest < Minitest::Test
   end
 
   def test_it_can_add_the_find_the_shift
-    number = '040895'
+    date = '040895'
     number_1 = '02715'
-    squared_number = Shift.squared_number(number)
-    assert_equal 1672401025, Shift.squared_number(number)
+    squared_number = Shift.squared_number(date)
+    assert_equal 1672401025, Shift.squared_number(date)
 
     offset = Shift.last_four_digits(squared_number)
     assert_equal 1025, offset
@@ -45,9 +45,9 @@ class ShiftTest < Minitest::Test
   end
 
   def test_it_can_combine_key_and_offset
-    number = '040895'
+    date = '040895'
     number_1 = '02715'
-    squared_number = Shift.squared_number(number)
+    squared_number = Shift.squared_number(date)
     offset = Shift.last_four_digits(squared_number)
     key = Shift.key_values(number_1)
     expected = [[02, 1], [27, 0], [71, 2], [15, 5]]
@@ -55,11 +55,16 @@ class ShiftTest < Minitest::Test
   end
 
   def test_it_can_find_the_sum
-    number = '040895'
+    date = '040895'
     number_1 = '02715'
-    squared_number = Shift.squared_number(number)
+    squared_number = Shift.squared_number(date)
     offset = Shift.last_four_digits(squared_number)
     key = Shift.key_values(number_1)
     assert_equal [3, 27, 73, 20], Shift.find_the_sum(key, offset)
+  end
+
+  def test_it_can_find_the_offset
+    date = '040895'
+    assert_equal 1025, Shift.find_offset(date)
   end
 end
