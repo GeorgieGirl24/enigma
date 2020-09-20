@@ -40,7 +40,7 @@ class ShiftTest < Minitest::Test
     assert_equal 1025, offset
 
     key = Shift.key_values(number_1)
-    expected = {A: 3, B: 27, C: 73, D: 20}
+    expected = { A: 3, B: 27, C: 73, D: 20 }
     assert_equal expected, Shift.find_the_shift(key, offset)
   end
 
@@ -57,8 +57,7 @@ class ShiftTest < Minitest::Test
   def test_it_can_find_the_sum
     date = '040895'
     number_1 = '02715'
-    squared_number = Shift.squared_number(date)
-    offset = Shift.last_four_digits(squared_number)
+    offset = Shift.find_offset(date)
     key = Shift.key_values(number_1)
     assert_equal [3, 27, 73, 20], Shift.find_the_sum(key, offset)
   end
