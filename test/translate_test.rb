@@ -36,10 +36,23 @@ class TranslateTest < Minitest::Test
   def test_it_can_take_a_return_value_from_shift_class
     arg_1 = [02, 27, 71, 15]
     arg_2 = 1025
-    Shift.find_the_shift(arg_1, arg_2)
     expected = { A: 3, B: 27, C: 73, D: 20 }
-    # Shift.stubs(:find_the_shift).with(arg_1, arg_2).returns(expected)
     assert_equal expected, Translate.get_code_break(arg_1, arg_2)
+  end
+
+  def test_i_can_take_one_character_and_shift_appropriately
+    character = 'h'
+    arg_1 = [02, 27, 71, 15]
+    arg_2 = 1025
+    shift = Translate.get_code_break(arg_1, arg_2)[:A]
+    direction = :+
+    assert_equal 'k' ,Translate.shift_characters(character, shift, direction)
+  end
+
+
+  def test_it_can_generate_translation
+
+
   end
 
   def test_it_has_a_string_to_read_
