@@ -1,10 +1,14 @@
 class Shift
-  def self.squared_number(offset)
-    (offset.to_i * offset.to_i)
+  def self.squared_number(number)
+    (number.to_i * number.to_i)
   end
 
-  def self.last_four_digits(offset)
-    offset.to_s[-4..-1].to_i
+  def self.last_four_digits(number)
+    number.to_s[-4..-1].to_i
+  end
+
+  def self.find_offset(date)
+    last_four_digits(squared_number(date))
   end
 
   def self.key_values(key)
