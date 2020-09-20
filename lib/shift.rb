@@ -1,10 +1,10 @@
-# this is going to be full of class methods
 class Shift
   def self.squared_number(offset)
-    (offset.to_i * offset.to_i).to_s
+    (offset.to_i * offset.to_i)
   end
 
   def self.last_four_digits(offset)
+    offset.to_s[-4..-1].to_i
   end
 
   def self.key_values(key)
@@ -14,12 +14,15 @@ class Shift
   end
 
   def self.find_the_shift(key, offset)
-    last_four_digits(offset).chars.map.with_index do |value, index|
-      key_values(key) + 0
+    array = offset.to_s.each_char.each_slice(1).map do |char|
+      char.join.to_i
     end
-    # offset.chars.map.with_index do |value, index|
-    #   require 'pry';binding.pry
-    #   value.to_i + key[index].to_i
-    # end
+    new_array = key.zip(array)
+    something = new_array.map do |set|
+      set.sum
+    end
+    hash = {}
+    
+
   end
 end
