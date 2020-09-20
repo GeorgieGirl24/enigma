@@ -47,11 +47,18 @@ class TranslateTest < Minitest::Test
     shift = Translate.get_code_break(arg_1, arg_2)[:A]
     direction = :+
     assert_equal 'k' ,Translate.shift_characters(character, shift, direction)
+    character = 'h'
+    arg_1 = [02, 27, 71, 15]
+    arg_2 = 1025
+    shift = Translate.get_code_break(arg_1, arg_2)[:A]
+    direction = :-
+    assert_equal 'e' ,Translate.shift_characters(character, shift, direction)
   end
 
+  def test_it_can_seperate_a_strings_characters_into_a_character
+  end
 
   def test_it_can_generate_translation
-
 
   end
 
