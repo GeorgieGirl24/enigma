@@ -11,7 +11,7 @@ class Enigma
 
   def encrypt(string, key=find_random_number, date=find_todays_date)
     #call a class Translate to give me answer!
-    { encryption: stringAdd, key: key, date: date }
+    { encryption: string, key: key, date: date }
   end
 
   def decrypt(string, key=find_random_number, date=find_todays_date)
