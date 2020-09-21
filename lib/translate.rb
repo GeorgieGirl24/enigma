@@ -1,7 +1,6 @@
 require './lib/shift'
 
 class Translate
-  A_SHIFT = (0..1_000_000_000)
   def self.make_alphabet
     ('a'..'z').to_a << ' '
   end
@@ -14,29 +13,28 @@ class Translate
     make_alphabet[index]
   end
 
-  def self.get_code_break(key, shift)
-    Shift.find_the_shift(key, shift)
-    # require 'pry';binding.pry
+  def self.get_code_break(key, date)
+    Shift.find_the_sum(key, date)
   end
 
-  def self.shift_character(character, shift, direction)
+  def self.shifted_character(character, shift, direction)
     make_alphabet[find_letters_index(character).send(direction, shift) % 27]
   end
 
   def self.translate(text, key, date, direction)
-    seperate_letters = text.each_char.map do |letter|
-      letter
+    the_keys = get_code_break(key, date)
+    text.downcase.chars.reduce("") do |collector, character|
+      next collector + character if !make_alphabet.include?(character)
+      the_keys.rotate!(1) unless collector.empty?
+      collector.concat(shifted_character(character, the_keys[0], direction))
     end
-    hash = {}
-    seperate_letters.each_with_index do |letter, index|
-      hash[index] = letter
-    end
-    which_shift = hash.keys.map do |key|
-      key.divmod(4)
-    end
-    which_shift.map do |set|
-      set.delete(set[1])
-    end
-    # require 'pry';binding.pry
+  end
+
+  def self.encrypt(text, key, date)
+    translate(text, key, date, :+)
+  end
+
+  def self.decrypt(text, key, date)
+    translate(text, key, date, :-)
   end
 end
