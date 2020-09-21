@@ -8,13 +8,6 @@ require 'mocha/minitest'
 
 class TranslateTest < Minitest::Test
   def setup
-    # enigma = Enigma.new
-    # enigma.encrypt
-    @message = 'hello world!'
-    @key = '02715'
-    @date = '040895'
-    # Enigma.stubs(:encrypt).with(@message, @key, @date).returns()
-
     @translate = Translate.new
     @shift = Shift.new
   end
@@ -62,6 +55,7 @@ class TranslateTest < Minitest::Test
     shift = Translate.get_code_break(key, date)[0]
     direction = :+
     assert_equal 'k' ,Translate.shifted_character(character, shift, direction)
+
     character = 'h'
     date = '040895'
     key = '02715'
@@ -77,6 +71,7 @@ class TranslateTest < Minitest::Test
     direction = :+
     expcted = 'keder ohulw!'
     assert_equal expcted, Translate.translate(text, key, date, direction)
+    
     text = 'hello world!'
     date = '040895'
     key = '02715'
@@ -98,6 +93,8 @@ class TranslateTest < Minitest::Test
     date = '040895'
     key = '02715'
     expected = 'eetsl dvoll!'
+    unexpected = 'hello world!'
     assert_equal expected, Translate.decryption(text, key, date)
+    refute_equal unexpected, Translate.decryption(text, key, date)
   end
 end
