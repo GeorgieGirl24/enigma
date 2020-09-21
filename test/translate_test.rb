@@ -49,35 +49,40 @@ class TranslateTest < Minitest::Test
   end
 
   def test_it_can_take_a_return_value_from_shift_class
-    arg_1 = [02, 27, 71, 15]
-    arg_2 = 1025
+    date = '040895'
+    key = '02715'
     expected = [3, 27, 73, 20]
-    assert_equal expected, Translate.get_code_break(arg_1, arg_2)
+    assert_equal expected, Translate.get_code_break(key, date)
   end
 
   def test_i_can_take_one_character_and_shift_appropriately
     character = 'h'
-    arg_1 = [02, 27, 71, 15]
-    arg_2 = 1025
-    shift = Translate.get_code_break(arg_1, arg_2)[0]
+    date = '040895'
+    key = '02715'
+    shift = Translate.get_code_break(key, date)[0]
     direction = :+
-    assert_equal 'k' ,Translate.shift_character(character, shift, direction)
+    assert_equal 'k' ,Translate.shifted_character(character, shift, direction)
     character = 'h'
-    arg_1 = [02, 27, 71, 15]
-    arg_2 = 1025
-    shift = Translate.get_code_break(arg_1, arg_2)[0]
+    date = '040895'
+    key = '02715'
+    shift = Translate.get_code_break(key, date)[0]
     direction = :-
-    assert_equal 'e' ,Translate.shift_character(character, shift, direction)
+    assert_equal 'e' ,Translate.shifted_character(character, shift, direction)
   end
 
   def test_it_can_generate_encryption_using_key_and_date
-    Shift.expects(:get_code_break).returns([3, 27, 73, 20])
-    text = 'hello world'
-    expcted = 'keder ohulw'
+    text = 'hello world!'
     date = '040895'
     key = '02715'
     direction = :+
+    expcted = 'keder ohulw!'
     assert_equal expcted, Translate.translate(text, key, date, direction)
+    text = 'hello world!'
+    date = '040895'
+    key = '02715'
+    direction = :-
+    expected_1 = 'eetsl dvoll!'
+    assert_equal expected_1, Translate.translate(text, key, date, direction)
   end
 
   def test_it_can_generate_translation_using_key
@@ -89,12 +94,18 @@ class TranslateTest < Minitest::Test
   end
 
   def test_it_can_encrypt_message
+    text = 'hello world!'
+    date = '040895'
+    key = '02715'
+    expected = 'keder ohulw!'
+    assert_equal expected, Translate.encrypt(text, key, date)
   end
 
   def test_it_can_decrypt_message
-  end
-
-  def test_it_can_have_a_return_message
-
+    text = 'hello world!'
+    date = '040895'
+    key = '02715'
+    expected = 'eetsl dvoll!'
+    assert_equal expected, Translate.decrypt(text, key, date)
   end
 end
