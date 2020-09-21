@@ -25,8 +25,4 @@ class CommandCenter
     "Created '#{@output_file}' with key #{encryption_hash[:key]} and date #{encryption_hash[:date]}"
     # encryption_message
   end
-
-  # def decryption_message
-  #   puts "Created '#{@output_file}' with the key #{@key} and date #{@date}"
-  # end
 end
