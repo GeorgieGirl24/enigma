@@ -47,7 +47,7 @@ class CommandCenterTest < Minitest::Test
 
   def test_it_can_read_in_a_file
     File.expects(:read).with('encrypted.txt').returns('hello world!')
-    assert_equal 'hello world!',  @command_center_1.read_a_file('encrypted.txt', 'keder ohulw!')
+    assert_equal 'hello world!',  @command_center_1.read_a_file('encrypted.txt', 'hello world!')
   end
 
   def test_it_can_send_an_output_to_the_screen_for_decryption
