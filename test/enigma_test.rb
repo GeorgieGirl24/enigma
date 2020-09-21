@@ -29,8 +29,8 @@ class EnigmaTest < Minitest::Test
     Translate.stubs(:return_message).with(arguments).returns('keder ohulw!')
     expected = {
       encryption: 'keder ohulw!',
-      key: 02715,
-      date: 040895
+      key: '02715',
+      date: '040895'
     }
     assert_equal expected, @enigma.encrypt('hello world!', '02715', '040895')
   end
@@ -84,7 +84,7 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_decrypt_with_a_no_date
-    # @enigma.stubs(:find_todays_date).returns('040895')
+    @enigma.stubs(:find_todays_date).returns('040895')
     date = @enigma.find_todays_date
     string = 'keder ohulw!'
     key = '02715'
