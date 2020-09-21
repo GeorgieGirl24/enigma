@@ -29,8 +29,8 @@ class CommandCenterTest < Minitest::Test
     assert_equal @setup_input_1[3], @command_center_1.date
     assert_equal @setup_input_2[0], @command_center_2.input_file
     assert_equal @setup_input_2[1], @command_center_2.output_file
-    assert_nil @command_center_2.key #decrypt
-    assert_nil @command_center_2.date #decrypt
+    assert_nil @command_center_2.key #encrypt
+    assert_nil @command_center_2.date #encrypt
   end
 
   def test_it_can_read_in_a_file
@@ -45,8 +45,8 @@ class CommandCenterTest < Minitest::Test
 
   def test_that_it_can_write_to_a_file
     File.expects(:write).with('encrypted.txt', 'keder ohulw!').returns('keder ohulw!')
-
     assert_equal 'keder ohulw!', @command_center_1.write_to_a_file('encrypted.txt', 'keder ohulw!')
+    # @command_center_2.write_to_a_file('encrypted.txt', 'keder ohulw!')
   end
 
   def test_it_can_make_an_encryption_pattern
@@ -55,11 +55,21 @@ class CommandCenterTest < Minitest::Test
       key: '02715',
       date: '040895'
     }
-    @enigma.stubs(:encrypt).with('hello world!', '02715', '040895').returns(intended)
-    expected = "Created 'encrypted.txt' with key 02715 and date 040895"
+    @enigma.stubs(:encrypt).with('hello world!').returns(intended)
+    expected = "Created 'encrypted.txt' with key #{intended[:key]} and date #{intended[:date]}"
     assert_equal expected, @command_center_1.encrypt_pattern
   end
 
+  def test_it_can_make_a_decryption_pattern
+    intended = {
+      decryption: 'hello world!',
+      key: 02715,
+      date: '040895'
+    }
+    @enigma.stubs(:decrypt).with('keder ohulw!', 02715, '040895').returns(intended)
+    expected = "Created 'decrypted.txt' with key #{intended[:key]} and date #{intended[:date]}"
+    assert_equal expected, @command_center_2.decrypt_pattern
+  end
 
 
   # def test_it_can_send_an_output_to_the_screen_for_decryption
@@ -68,20 +78,6 @@ class CommandCenterTest < Minitest::Test
   #   expected = "Created 'decrypted.txt' with the key 02715 and date 040895"
   #   assert_equal expected, @command_center_1.decryption_message
   # end
-  #
-  # def test_it_can_send_an_out_put_message_for_encryption
-  #   # @encrypt_message
-  #   # the_encryption = @enigma.encrypt(@command_center_1.message, @command_center_1.key, @command_center_1.date)
-  #   expected = "Created '#{@command_center_1.message}' with the key #{@command_center_1.key} and date #{@command_center_1.date}"
-  #   assert_equal expected, @command_center_1.encryption_message
-  # end
-
-
-
-  def test_it_can_make_a_decryption_pattern
-
-  end
-
   def test_it_can_know_what_the_current_key_and_date_are
     skip
     @command_center_1.encrypt_pattern
