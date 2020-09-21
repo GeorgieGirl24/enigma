@@ -30,11 +30,11 @@ class Translate
     end
   end
 
-  def self.encrypt(text, key, date)
+  def self.encryption(text, key, date)
     translate(text, key, date, :+)
   end
 
-  def self.decrypt(text, key, date)
+  def self.decryption(text, key, date)
     translate(text, key, date, :-)
   end
 end

@@ -8,13 +8,6 @@ require 'mocha/minitest'
 
 class TranslateTest < Minitest::Test
   def setup
-    # enigma = Enigma.new
-    # enigma.encrypt
-    @message = 'hello world!'
-    @key = '02715'
-    @date = '040895'
-    # Enigma.stubs(:encrypt).with(@message, @key, @date).returns()
-
     @translate = Translate.new
     @shift = Shift.new
   end
@@ -62,6 +55,7 @@ class TranslateTest < Minitest::Test
     shift = Translate.get_code_break(key, date)[0]
     direction = :+
     assert_equal 'k' ,Translate.shifted_character(character, shift, direction)
+
     character = 'h'
     date = '040895'
     key = '02715'
@@ -77,6 +71,7 @@ class TranslateTest < Minitest::Test
     direction = :+
     expcted = 'keder ohulw!'
     assert_equal expcted, Translate.translate(text, key, date, direction)
+    
     text = 'hello world!'
     date = '040895'
     key = '02715'
@@ -85,27 +80,21 @@ class TranslateTest < Minitest::Test
     assert_equal expected_1, Translate.translate(text, key, date, direction)
   end
 
-  def test_it_can_generate_translation_using_key
-
-  end
-
-  def test_it_can_generate_translation_using_only_message
-
-  end
-
-  def test_it_can_encrypt_message
+  def test_it_can_find_encryption
     text = 'hello world!'
     date = '040895'
     key = '02715'
     expected = 'keder ohulw!'
-    assert_equal expected, Translate.encrypt(text, key, date)
+    assert_equal expected, Translate.encryption(text, key, date)
   end
 
-  def test_it_can_decrypt_message
+  def test_it_can_find_decryption
     text = 'hello world!'
     date = '040895'
     key = '02715'
     expected = 'eetsl dvoll!'
-    assert_equal expected, Translate.decrypt(text, key, date)
+    unexpected = 'hello world!'
+    assert_equal expected, Translate.decryption(text, key, date)
+    refute_equal unexpected, Translate.decryption(text, key, date)
   end
 end
