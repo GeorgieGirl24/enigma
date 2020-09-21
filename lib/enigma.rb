@@ -11,7 +11,7 @@ class Enigma
 
   def encrypt(string, key=find_random_number, date=find_todays_date)
     {
-      encryption: Translate.encrypt(string, key, date),
+      encryption: Translate.encryption(string, key, date),
       key: key,
       date: date
     }
@@ -19,7 +19,7 @@ class Enigma
 
   def decrypt(string, key=find_random_number, date=find_todays_date)
     {
-      decryption: Translate.decrypt(string, key, date), 
+      decryption: Translate.decryption(string, key, date), 
       key: key,
       date: date
     }
