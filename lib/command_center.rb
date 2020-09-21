@@ -20,18 +20,21 @@ class CommandCenter
   end
 
   def encrypt_pattern
-    encryption_hash
-    write_to_a_file(ARGV[1], encryption_hash[:encryption])
-    puts "Created '#{ARGV[1]}' with key #{encryption_hash[:key]} and date #{encryption_hash[:date]}"
+    translated_hash
+    write_to_a_file(@output_file, translated_hash[:encryption])
+
+    puts "Created '#{@output_file}' with key #{translated_hash[:key]} and date #{translated_hash[:date]}"
   end
 
-  def encryption_hash
+  def translated_hash
     @enigma.encrypt(@message)
   end
 
+  
+
   def decrypt_pattern
-    encryption_hash
-    write_to_a_file(@output_file, encryption_hash[:encryption])
-    puts "Created '#{@output_file}' with key #{encryption_hash[:key]} and date #{encryption_hash[:date]}"
+    translated_hash
+    write_to_a_file(@output_file, translated_hash[:encryption])
+    puts "Created '#{@output_file}' with key #{translated_hash[:key]} and date #{translated_hash[:date]}"
   end
 end
