@@ -1,6 +1,8 @@
 require './test/test_helper'
 require './lib/enigma'
 require './lib/command_center'
+require './lib/translate'
+require './lib/shift'
 require 'mocha/minitest'
 
 class CommandCenterTest < Minitest::Test
@@ -41,9 +43,17 @@ class CommandCenterTest < Minitest::Test
   #   @command_center_1.write_to_a_file('encrypted.txt', 'keder ohulw!')
   # end
 
-  def test_it_can_send_an_output_to_the_screen
-    expected = "Created 'encrypted.txt' with the key 02715 and date 040895"
-    assert_equal expected, @command_center_1.out_put_message
+  def test_it_can_send_an_output_to_the_screen_for_decryption
+    @command_center_1.stubs(:decryption_message).returns('decrypted.txt')
+    expected = "Created 'decrypted.txt' with the key 02715 and date 040895"
+    assert_equal expected, @command_center_1.decryption_message
+  end
+
+  def test_it_can_send_an_out_put_message_for_encryption
+    enigma = Enigma.new
+    the_encryption = enigma.encrypt(@command_center_1.message, @command_center_1.key, @command_center_1.date)
+    expected = "Created 'encrypted.txt' with the key #{the_encryption[:key]} and date #{the_encryption[:date]}"
+    assert_equal expected, @command_center_1.encryption_message
   end
 
   def test_it_can_create_a_return_hash

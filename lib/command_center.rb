@@ -11,7 +11,7 @@ class CommandCenter
     @output_file = argv[1]
     @key = argv[2]
     @date = argv[3]
-    @message = File.read(input_file).chomp
+    @message = File.read(input_file)
     @enigma = Enigma.new
   end
 
@@ -20,7 +20,13 @@ class CommandCenter
   #   File.write(output_file, input_message)
   # end
 
-  def out_put_message
-    "Created '#{output_file}' with the key #{key} and date #{date}"
+  def encryption_message
+    the_key = @engima.encrypt(@message, @key, @date)[:key]
+    the_date = @enigma.encrypt(@message, @key, @date)[:date]
+    puts "Created '#{@output_file}' with the key #{the_key} and date #{@engima.encrypt[:date]}"
+  end
+
+  def decryption_message
+    puts "Created '#{@output_file}' with the key #{@key} and date #{@date}"
   end
 end
