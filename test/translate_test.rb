@@ -85,27 +85,19 @@ class TranslateTest < Minitest::Test
     assert_equal expected_1, Translate.translate(text, key, date, direction)
   end
 
-  def test_it_can_generate_translation_using_key
-
-  end
-
-  def test_it_can_generate_translation_using_only_message
-
-  end
-
-  def test_it_can_encrypt_message
+  def test_it_can_find_encryption
     text = 'hello world!'
     date = '040895'
     key = '02715'
     expected = 'keder ohulw!'
-    assert_equal expected, Translate.encrypt(text, key, date)
+    assert_equal expected, Translate.encryption(text, key, date)
   end
 
-  def test_it_can_decrypt_message
+  def test_it_can_find_decryption
     text = 'hello world!'
     date = '040895'
     key = '02715'
     expected = 'eetsl dvoll!'
-    assert_equal expected, Translate.decrypt(text, key, date)
+    assert_equal expected, Translate.decryption(text, key, date)
   end
 end
