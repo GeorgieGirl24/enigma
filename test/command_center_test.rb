@@ -43,10 +43,21 @@ class CommandCenterTest < Minitest::Test
     assert_instance_of Enigma, @command_center_2.enigma
   end
 
-  # def test_that_it_can_write_to_a_file
-  #   File.expects(:write).with('encrypted.txt').returns('keder ohulw!')
-  #   @command_center_1.write_to_a_file('encrypted.txt', 'keder ohulw!')
-  # end
+  def test_it_can_make_an_encryption_pattern
+    intended = {
+      encryption: 'keder ohulw!',
+      key: '02715',
+      date: '040895'
+    }
+    @enigma.stubs(:encrypt).with('hello world!', '02715', '040895').returns(intended)
+    expected = "Created 'encrypted.txt' with key 02715 and date 040895"
+    assert_equal expected, @command_center_1.encrypt_pattern
+  end
+
+  def test_that_it_can_write_to_a_file
+    File.expects(:write).with('encrypted.txt').returns('keder ohulw!')
+    assert_equal 'keder ohulw!', @command_center_1.write_to_a_file('encrypted.txt', 'keder ohulw!')
+  end
 
 
   # def test_it_can_send_an_output_to_the_screen_for_decryption
@@ -64,13 +75,6 @@ class CommandCenterTest < Minitest::Test
   # end
 
 
-  def test_it_can_make_an_encryption_pattern
-    # skip
-    @command_center_1.message
-    @enigma.stubs(:encrypt).returns('keder ohulw!')
-    expected = "Created 'encrypted.txt' with key and date"
-    assert_equal expected, @command_center_1.encrypt_pattern
-  end
 
   def test_it_can_make_a_decryption_pattern
 
