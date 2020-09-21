@@ -1,4 +1,5 @@
 require 'date'
+require './lib/translate'
 
 class Enigma
   def find_todays_date
@@ -11,9 +12,9 @@ class Enigma
 
   def encrypt(string, key=find_random_number, date=find_todays_date)
     {
-      encryption: Translate.encryption(string, key, date)[:string],
-      key: Translate.encryption(string, key, date)[:key],
-      date: Translate.encryption(string, key, date)[:date]
+      encryption: Translate.encryption(string, key, date),
+      key: key,
+      date: date
     }
   end
 
