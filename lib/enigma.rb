@@ -20,9 +20,9 @@ class Enigma
 
   def decrypt(string, key=find_random_number, date=find_todays_date)
     {
-      decryption: Translate.decryption(string, key, date)[:string],
-      key: Translate.decryption(string, key, date)[:key],
-      date: Translate.decryption(string, key, date)[:date]
+      decryption: Translate.decryption(string, key, date),
+      key: key,
+      date: date
     }
   end
 end
