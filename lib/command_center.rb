@@ -15,12 +15,25 @@ class CommandCenter
     @enigma = Enigma.new
   end
 
-  # def write_to_a_file(output_file, input_message)
-  #   require 'pry';binding.pry
-  #   File.write(output_file, input_message)
-  # end
+  def write_to_a_file(output_file, input_message)
+    File.write(output_file, input_message)
+  end
 
-  def out_put_message
-    "Created '#{output_file}' with the key #{key} and date #{date}"
+  def encrypt_pattern
+    translated_hash = @enigma.encrypt(@message)
+    write_to_a_file(@output_file, translated_hash[:encryption])
+    update_key_and_date(translated_hash)
+    puts "Created '#{@output_file}' with key #{translated_hash[:key]} and date #{translated_hash[:date]}"
+  end
+
+  def update_key_and_date(translated_hash)
+    @key = translated_hash[:key]
+    @date = translated_hash[:date]
+  end
+
+  def decrypt_pattern
+    translated_hash = @enigma.decrypt(@message)
+    write_to_a_file(@output_file, translated_hash[:decryption])
+    puts "Created '#{@output_file}' with key #{translated_hash[:key]} and date #{translated_hash[:date]}"
   end
 end
