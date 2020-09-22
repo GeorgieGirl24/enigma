@@ -1,5 +1,6 @@
 require './lib/shift'
 require './lib/foundamentable'
+
 class Translate
   extend Foundamentable
 
