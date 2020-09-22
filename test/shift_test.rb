@@ -51,4 +51,10 @@ class ShiftTest < Minitest::Test
     date = '040895'
     assert_equal 1025, Shift.find_offset(date)
   end
+
+  def test_it_can_make_an_offset_into_an_array
+    date = '040895'
+    key = '02715'
+    assert_equal [1, 0, 2, 5], Shift.make_offset_into_array(key, date)
+  end
 end
