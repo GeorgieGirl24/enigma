@@ -111,5 +111,7 @@ class EnigmaTest < Minitest::Test
     }
     expected = { decryption: 'hello world!', key: '02715', date: '040895' }
     assert_equal expected, @enigma.get_together(hash_1, '02715', '040895')
+    unexpected = { encryption: 'hello world!', key: '02715', date: '040895' }
+    refute_equal unexpected, @enigma.get_together(hash_1, '02715', '040895')
   end
 end
