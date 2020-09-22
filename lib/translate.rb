@@ -26,7 +26,7 @@ class Translate
     text.downcase.chars.reduce("") do |collector, character|
       next collector + character if !make_alphabet.include?(character)
       the_keys.rotate!(1) unless collector.empty?
-      collector.concat(shifted_character(character, the_keys[0], direction))
+      collector.concat(shifted_character(character, the_keys[0], direction)) 
     end
   end
 
