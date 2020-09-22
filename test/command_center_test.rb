@@ -68,33 +68,21 @@ class CommandCenterTest < Minitest::Test
       date: '040895'
     }
     @enigma.stubs(:decrypt).with('keder ohulw!', '02715', '040895').returns(intended)
-
     expected = "Created 'decrypted.txt' with key #{intended[:key]} and date #{intended[:date]}"
     assert_equal expected, @command_center_2.decrypt_pattern
   end
 
-  def test_it_can_have_access_to_the_current_hash
-    File.expects(:read).with("encrypted.txt").returns('keder ohulw!')
-
-    expected = {
-      decryption: 'hello world!',
-      key: 02715,
-      date: '040895'
-    }
-    assert_equal expected,@command_center_1.translated_hash
-  end
-  # def test_it_can_send_an_output_to_the_screen_for_decryption
-  #   skip
-  #   @command_center_1.stubs(:decryption_message).returns('decrypted.txt')
-  #   expected = "Created 'decrypted.txt' with the key 02715 and date 040895"
-  #   assert_equal expected, @command_center_1.decryption_message
-  # end
   def test_it_can_update_what_the_current_key_and_date_are
     # skip
-    @command_center_1.encrypt_pattern
-    @command_center_1.update_key_and_date
+    expected = {
+      decryption: 'hello world!',
+      key: '02715',
+      date: '040895'
+    }
+    @command_center_1.stubs(:translated_hash).returns(expected)
+    @command_center_1.stubs(:update_key_and_date)
 
-    assert_equal '0215', @command_center_1.key
-    assert_equal '040895', @command_center_1.date
+    assert_equal '02715', @command_center_2.key
+    assert_equal '040895', @command_center_2.date
   end
 end
