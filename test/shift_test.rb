@@ -15,6 +15,7 @@ class ShiftTest < Minitest::Test
   def test_it_can_square_a_six_digit_number
     date = '040895'
     assert_equal 1672401025, Shift.squared_number(date)
+    refute_equal 8304720385, Shift.squared_number(date)
   end
 
   def test_it_can_find_the_last_four_digits
@@ -38,7 +39,6 @@ class ShiftTest < Minitest::Test
   end
 
   def test_it_can_find_the_sum
-    # skip
     date = '040895'
     key = '02715'
     assert_equal [3, 27, 73, 20], Shift.find_the_sum(key, date)
@@ -50,6 +50,7 @@ class ShiftTest < Minitest::Test
   def test_it_can_find_the_offset_by_date
     date = '040895'
     assert_equal 1025, Shift.find_offset(date)
+    refute_equal 4580, Shift.find_offset(date)
   end
 
   def test_it_can_make_an_offset_into_an_array
