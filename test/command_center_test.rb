@@ -3,6 +3,7 @@ require './lib/enigma'
 require './lib/command_center'
 require './lib/translate'
 require './lib/shift'
+require './lib/foundamentable'
 require 'mocha/minitest'
 
 class CommandCenterTest < Minitest::Test
@@ -29,8 +30,8 @@ class CommandCenterTest < Minitest::Test
     assert_equal @setup_input_2[3], @command_center_2.date
     assert_equal @setup_input_1[0], @command_center_1.input_file
     assert_equal @setup_input_1[1], @command_center_1.output_file
-    assert_nil @command_center_1.key #encrypt
-    assert_nil @command_center_1.date #encrypt
+    assert_nil @command_center_1.key
+    assert_nil @command_center_1.date
   end
 
   def test_it_can_read_in_a_file
@@ -96,7 +97,7 @@ class CommandCenterTest < Minitest::Test
       key: '02715',
       date: '040895'
     }
-    @command_center_1.stubs(:translated_hash).returns(expected)
+    @command_center_1.stubs(:fixed).returns(expected)
     @command_center_1.stubs(:update_key_and_date)
 
     assert_equal '02715', @command_center_2.key
