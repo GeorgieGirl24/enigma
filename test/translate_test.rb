@@ -71,7 +71,7 @@ class TranslateTest < Minitest::Test
     direction = :+
     expcted = 'keder ohulw!'
     assert_equal expcted, Translate.translate(text, key, date, direction)
-    
+
     text = 'hello world!'
     date = '040895'
     key = '02715'
@@ -88,6 +88,14 @@ class TranslateTest < Minitest::Test
     assert_equal expected, Translate.encryption(text, key, date)
   end
 
+  def test_it_can_handle_encryption_with_all_non_alphabet_characters
+    text = '*&@#$'
+    date = '040895'
+    key = '02715'
+    expected = '*&@#$'
+    assert_equal expected, Translate.encryption(text, key, date)
+  end
+
   def test_it_can_find_decryption
     text = 'hello world!'
     date = '040895'
@@ -96,5 +104,13 @@ class TranslateTest < Minitest::Test
     unexpected = 'hello world!'
     assert_equal expected, Translate.decryption(text, key, date)
     refute_equal unexpected, Translate.decryption(text, key, date)
+  end
+
+  def test_it_can_handle_decryption_with_all_non_alphabet_characters
+    text = '*&@#$'
+    date = '040895'
+    key = '02715'
+    expected = '*&@#$'
+    assert_equal expected, Translate.decryption(text, key, date)
   end
 end

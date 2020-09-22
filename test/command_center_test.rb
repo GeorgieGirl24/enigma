@@ -62,6 +62,20 @@ class CommandCenterTest < Minitest::Test
     assert_nil @command_center_1.encrypt_pattern
   end
 
+  # def test_it_can_generate_the_correct_pattern_of_encryption
+  #   intended = {
+  #     encryption: 'keder ohulw!',
+  #     key: '02715',
+  #     date: '040895'
+  #   }
+  #   @command_center_1.enigma.encrypt('hello world!', '02715', '040895')
+  #   File.read('message.txt').chomp
+  #   @command_center_1.write_to_a_file(@command_center_1.output_file, intended[:encryption])
+  #   @command_center_1.update_key_and_date(intended)
+  #   assert_nil @command_center_1.encrypt_pattern
+  # end
+
+
   def test_it_can_make_a_decryption_pattern
     arguments = ['encrypted.txt', 'decrypted.txt', '02715', '040895']
     File.expects(:read).with('encrypted.txt').returns('keder ohulw!')
@@ -71,8 +85,6 @@ class CommandCenterTest < Minitest::Test
       key: '02715',
       date: '040895'
     }
-    # @enigma.expects(:decrypt).with('keder ohulw!', '02715', '040895').returns(intended)
-    # command_center.expects(:write_to_a_file).with('decrypted.txt', 'hello world!')
 
     expected = "Created 'decrypted.txt' with key #{intended[:key]} and date #{intended[:date]}"
     assert_nil command_center.decrypt_pattern
