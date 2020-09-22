@@ -1,10 +1,8 @@
 require './test/test_helper'
-require './lib/enigma'
-require './lib/command_center'
 require './lib/translate'
 require './lib/shift'
 require './lib/foundamentable'
-require 'mocha/minitest'
+
 
 
 class TranslateTest < Minitest::Test
@@ -63,6 +61,14 @@ class TranslateTest < Minitest::Test
     date = '040895'
     key = '02715'
     expected = 'keder ohulw!'
+    assert_equal expected, Translate.encryption(text, key, date)
+  end
+
+  def test_it_can_find_another_encryption
+    text = 'we can do this!'
+    date = '200920'
+    key = '02715'
+    expected = 'diqrirqswdjwqw!'
     assert_equal expected, Translate.encryption(text, key, date)
   end
 
