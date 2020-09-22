@@ -1,9 +1,7 @@
 require './test/test_helper'
-require './lib/enigma'
-require './lib/command_center'
 require './lib/translate'
 require './lib/shift'
-require 'mocha/minitest'
+
 
 class ShiftTest < Minitest::Test
   def setup
