@@ -1,9 +1,8 @@
 require './test/test_helper'
-require './lib/enigma'
-require './lib/command_center'
 require './lib/translate'
 require './lib/shift'
-require 'mocha/minitest'
+require './lib/foundamentable'
+
 
 
 class TranslateTest < Minitest::Test
@@ -17,30 +16,6 @@ class TranslateTest < Minitest::Test
     assert_instance_of Shift, @shift
   end
 
-  def test_it_can_set_up_an_alphabet
-    expected = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ']
-    assert_equal expected, Translate.make_alphabet
-    assert_equal 27, Translate.make_alphabet.count
-  end
-
-  def test_it_can_find_a_letters_index
-    letter = 'a'
-    assert_equal 0, Translate.find_letters_index(letter)
-    letter = 'z'
-    assert_equal 25, Translate.find_letters_index(letter)
-    letter = ' '
-    assert_equal 26, Translate.find_letters_index(letter)
-  end
-
-  def test_it_can_find_an_indexes_letter
-    index = 12
-    assert_equal 'm', Translate.find_indexes_letter(index)
-    index = 26
-    assert_equal ' ', Translate.find_indexes_letter(index)
-    index = 18
-    assert_equal 's', Translate.find_indexes_letter(index)
-  end
-
   def test_it_can_take_a_return_value_from_shift_class
     date = '040895'
     key = '02715'
@@ -49,6 +24,7 @@ class TranslateTest < Minitest::Test
   end
 
   def test_i_can_take_one_character_and_shift_appropriately
+
     character = 'h'
     date = '040895'
     key = '02715'
@@ -85,6 +61,14 @@ class TranslateTest < Minitest::Test
     date = '040895'
     key = '02715'
     expected = 'keder ohulw!'
+    assert_equal expected, Translate.encryption(text, key, date)
+  end
+
+  def test_it_can_find_another_encryption
+    text = 'we can do this!'
+    date = '200920'
+    key = '02715'
+    expected = 'diqrirqswdjwqw!'
     assert_equal expected, Translate.encryption(text, key, date)
   end
 

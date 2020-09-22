@@ -1,5 +1,4 @@
 require './test/test_helper'
-require './lib/translate'
 require './lib/shift'
 
 
@@ -22,6 +21,7 @@ class ShiftTest < Minitest::Test
     date = '040895'
     squared_number = Shift.squared_number(date)
     assert_equal 1025, Shift.last_four_digits(squared_number)
+    refute_equal 2148, Shift.last_four_digits(squared_number)
   end
 
   def test_it_can_split_up_the_key_value
@@ -35,7 +35,9 @@ class ShiftTest < Minitest::Test
     date = '040895'
     key = '02715'
     expected = [[02, 1], [27, 0], [71, 2], [15, 5]]
+    unexpected = [[02, 1], [27, 1], [71, 2], [16, 5]]
     assert_equal expected, Shift.combine_key_and_offset(key, date)
+    refute_equal unexpected, Shift.combine_key_and_offset(key, date)
   end
 
   def test_it_can_find_the_sum
@@ -57,5 +59,6 @@ class ShiftTest < Minitest::Test
     date = '040895'
     key = '02715'
     assert_equal [1, 0, 2, 5], Shift.make_offset_into_array(key, date)
+    refute_equal [0, 1, 2, 5], Shift.make_offset_into_array(key, date)
   end
 end

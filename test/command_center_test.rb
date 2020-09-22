@@ -3,6 +3,7 @@ require './lib/enigma'
 require './lib/command_center'
 require './lib/translate'
 require './lib/shift'
+require './lib/foundamentable'
 require 'mocha/minitest'
 
 class CommandCenterTest < Minitest::Test
@@ -29,8 +30,8 @@ class CommandCenterTest < Minitest::Test
     assert_equal @setup_input_2[3], @command_center_2.date
     assert_equal @setup_input_1[0], @command_center_1.input_file
     assert_equal @setup_input_1[1], @command_center_1.output_file
-    assert_nil @command_center_1.key #encrypt
-    assert_nil @command_center_1.date #encrypt
+    assert_nil @command_center_1.key
+    assert_nil @command_center_1.date
   end
 
   def test_it_can_read_in_a_file
@@ -62,18 +63,18 @@ class CommandCenterTest < Minitest::Test
     assert_nil @command_center_1.encrypt_pattern
   end
 
-  # def test_it_can_generate_the_correct_pattern_of_encryption
-  #   intended = {
-  #     encryption: 'keder ohulw!',
-  #     key: '02715',
-  #     date: '040895'
-  #   }
-  #   @command_center_1.enigma.encrypt('hello world!', '02715', '040895')
-  #   File.read('message.txt').chomp
-  #   @command_center_1.write_to_a_file(@command_center_1.output_file, intended[:encryption])
-  #   @command_center_1.update_key_and_date(intended)
-  #   assert_nil @command_center_1.encrypt_pattern
-  # end
+  def test_it_can_generate_the_correct_pattern_of_encryption
+    intended = {
+      encryption: 'keder ohulw!',
+      key: '02715',
+      date: '040895'
+    }
+    @command_center_1.enigma.encrypt('hello world!', '02715', '040895')
+    File.write('encyprted.txt', 'keder ohulw!')
+    @command_center_1.write_to_a_file(@command_center_1.output_file, intended[:encryption])
+    @command_center_1.update_key_and_date(intended)
+    assert_nil @command_center_1.encrypt_pattern
+  end
 
 
   def test_it_can_make_a_decryption_pattern
@@ -96,7 +97,7 @@ class CommandCenterTest < Minitest::Test
       key: '02715',
       date: '040895'
     }
-    @command_center_1.stubs(:translated_hash).returns(expected)
+    @command_center_1.stubs(:fixed).returns(expected)
     @command_center_1.stubs(:update_key_and_date)
 
     assert_equal '02715', @command_center_2.key
