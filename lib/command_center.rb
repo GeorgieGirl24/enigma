@@ -29,10 +29,11 @@ class CommandCenter
   def update_key_and_date(translated_hash)
     @key = translated_hash[:key]
     @date = translated_hash[:date]
+    # require 'pry';binding.pry
   end
 
   def decrypt_pattern
-    translated_hash = @enigma.decrypt(@message)
+    translated_hash = @enigma.decrypt(@message, @key, @date)
     write_to_a_file(@output_file, translated_hash[:decryption])
     puts "Created '#{@output_file}' with key #{translated_hash[:key]} and date #{translated_hash[:date]}"
   end
