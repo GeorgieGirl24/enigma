@@ -49,31 +49,36 @@ class CommandCenterTest < Minitest::Test
   end
 
   def test_it_can_make_an_encryption_pattern
-    File.expects(:read).with("message.txt").returns('hello world!')
     intended = {
       encryption: 'keder ohulw!',
       key: '02715',
       date: '040895'
     }
-    @enigma.stubs(:encrypt).with('hello world!').returns(intended)
+    @command_center_1.enigma.stubs(:encrypt).with('hello world!').returns(intended)
+    @command_center_1.stubs(:update_key_and_date).with(intended)
+    @command_center_1.stubs(:write_to_a_file).with('encrypted.txt','keder ohulw!')
+
     expected = "Created 'encrypted.txt' with key #{intended[:key]} and date #{intended[:date]}"
-    assert_equal expected, @command_center_1.encrypt_pattern
+    assert_nil @command_center_1.encrypt_pattern
   end
 
   def test_it_can_make_a_decryption_pattern
-    File.expects(:read).with("encrypted.txt").returns('keder ohulw!')
+    arguments = ['encrypted.txt', 'decrypted.txt', '02715', '040895']
+    File.expects(:read).with('encrypted.txt').returns('keder ohulw!')
+    command_center = CommandCenter.new(arguments)
     intended = {
       decryption: 'hello world!',
       key: '02715',
       date: '040895'
     }
-    @enigma.stubs(:decrypt).with('keder ohulw!', '02715', '040895').returns(intended)
+    # @enigma.expects(:decrypt).with('keder ohulw!', '02715', '040895').returns(intended)
+    # command_center.expects(:write_to_a_file).with('decrypted.txt', 'hello world!')
+
     expected = "Created 'decrypted.txt' with key #{intended[:key]} and date #{intended[:date]}"
-    assert_equal expected, @command_center_2.decrypt_pattern
+    assert_nil command_center.decrypt_pattern
   end
 
-  def test_it_can_update_what_the_current_key_and_date_are
-    # skip
+  def test_it_can_update_what_the_current_key_and_date
     expected = {
       decryption: 'hello world!',
       key: '02715',
