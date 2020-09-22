@@ -20,20 +20,20 @@ class CommandCenter
   end
 
   def encrypt_pattern
-    translated_hash = @enigma.encrypt(@message)
-    write_to_a_file(@output_file, translated_hash[:encryption])
-    update_key_and_date(translated_hash)
-    puts "Created '#{@output_file}' with key #{translated_hash[:key]} and date #{translated_hash[:date]}"
+    fixed = @enigma.encrypt(@message)
+    write_to_a_file(@output_file, fixed[:encryption])
+    update_key_and_date(fixed)
+    puts "Created '#{@output_file}' with key #{fixed[:key]} and date #{fixed[:date]}"
   end
 
-  def update_key_and_date(translated_hash)
-    @key = translated_hash[:key]
-    @date = translated_hash[:date]
+  def update_key_and_date(fixed)
+    @key = fixed[:key]
+    @date = fixed[:date]
   end
 
   def decrypt_pattern
-    translated_hash = @enigma.decrypt(@message, @key, @date)
-    write_to_a_file(@output_file, translated_hash[:decryption])
-    puts "Created '#{@output_file}' with key #{translated_hash[:key]} and date #{translated_hash[:date]}"
+    fixed = @enigma.decrypt(@message, @key, @date)
+    write_to_a_file(@output_file, fixed[:decryption])
+    puts "Created '#{@output_file}' with key #{fixed[:key]} and date #{fixed[:date]}"
   end
 end
