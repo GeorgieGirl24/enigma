@@ -11,18 +11,16 @@ class Enigma
   end
 
   def encrypt(string, key=find_random_number, date=find_todays_date)
-    {
-      encryption: Translate.encryption(string, key, date),
-      key: key,
-      date: date
-    }
+    hash = { encryption: Translate.encryption(string, key, date)}
+    get_together(hash, key, date)
   end
 
-  def decrypt(string, key=find_random_number, date=find_todays_date)
-    {
-      decryption: Translate.decryption(string, key, date),
-      key: key,
-      date: date
-    }
+  def decrypt(string, key, date=find_todays_date)
+    hash = { decryption: Translate.decryption(string, key, date) }
+    get_together(hash, key, date)
+  end
+
+  def get_together(hash, key, date)
+    hash.merge({:key => key, :date => date})
   end
 end
