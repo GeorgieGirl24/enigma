@@ -17,10 +17,14 @@ class Shift
     end
   end
 
-  def self.combine_key_and_offset(key, date)
-    key_values(key).zip(find_offset(date).to_s.each_char.each_slice(1).map do |character|
+  def self.make_offset_into_array(key, date)
+    find_offset(date).to_s.each_char.each_slice(1).map do |character|
       character.join.to_i
-    end)
+    end
+  end
+
+  def self.combine_key_and_offset(key, date)
+    key_values(key).zip(make_offset_into_array(key,date))
   end
 
   def self.find_the_sum(key, date)
