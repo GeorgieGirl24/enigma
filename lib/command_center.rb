@@ -29,7 +29,6 @@ class CommandCenter
   def update_key_and_date(translated_hash)
     @key = translated_hash[:key]
     @date = translated_hash[:date]
-    # require 'pry';binding.pry
   end
 
   def decrypt_pattern
